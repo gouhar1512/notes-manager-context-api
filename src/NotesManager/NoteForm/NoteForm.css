@@ -1,0 +1,40 @@
+.note-form {
+  width: 40%;
+  padding: 16px;
+  margin: auto;
+  margin-top: 8px;
+  text-align: left;
+  border: 1px solid purple;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background-color: #f7bff7;
+}
+.note-form input,
+textarea,
+button {
+  width: 100%;
+  padding: 8px;
+}
+.note-form label {
+  display: block;
+}
+
+.label-text {
+  font-weight: bold;
+}
+.note-form button {
+  padding: 8px 16px;
+  cursor: pointer;
+  background-color: var(--bgprimary);
+  color: var(--textsecondary);
+  border: none;
+}
+
+.note-form button:hover {
+  background-color: #0606c7;
+}
+
+#note-content {
+  resize: none;
+}
