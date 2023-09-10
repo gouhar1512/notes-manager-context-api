@@ -1,9 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./NoteForm.css";
 
-const NoteForm = ({ onAddNote }) => {
+const NoteForm = ({
+  notes,
+  onAddNote,
+  noteToUpdate,
+  onUpdateNote,
+  setNoteToUpdateHandler,
+}) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const id = crypto.randomUUID();
+  const [isUpdatingNote, setIsUpdatingNote] = useState(false);
+
+  useEffect(() => {
+    if (noteToUpdate && notes.length > 0) {
+      setIsUpdatingNote(true);
+    } else {
+      setIsUpdatingNote(false);
+      setNoteToUpdateHandler(null);
+    }
+  }, [noteToUpdate, notes.length, setNoteToUpdateHandler]);
+
+  useEffect(() => {
+    if (noteToUpdate) {
+      setTitle(noteToUpdate.title);
+      setContent(noteToUpdate.content);
+    } else {
+      setTitle("");
+      setContent("");
+    }
+  }, [isUpdatingNote, noteToUpdate]);
 
   const setTitleHandler = (e) => {
     setTitle(e.target.value);
@@ -20,11 +47,17 @@ const NoteForm = ({ onAddNote }) => {
       return;
     }
     let note = {
-      id: parseInt(Math.random() * 10),
+      id,
       title,
       content,
     };
-    onAddNote(note);
+    if (noteToUpdate && notes.length > 0) {
+      note.id = noteToUpdate.id;
+      onUpdateNote(note);
+    } else {
+      console.log(note);
+      onAddNote(note);
+    }
     setTitle("");
     setContent("");
   };
@@ -43,9 +76,22 @@ const NoteForm = ({ onAddNote }) => {
           onChange={setContentHandler}
         />
       </label>
-      <button type="submit" className="btn-add-note">
-        Add Note
-      </button>
+      {!isUpdatingNote ? (
+        <button type="submit" className="btn-add-note">
+          Add Note
+        </button>
+      ) : (
+        <div className="update-ctas">
+          <button type="submit" className="btn-update-note">
+            Update Note
+          </button>
+          <button
+            className="btn-cancel-update"
+            onClick={() => setNoteToUpdateHandler(null)}>
+            Cancel
+          </button>
+        </div>
+      )}
     </form>
   );
 };

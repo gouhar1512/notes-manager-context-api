@@ -1,8 +1,10 @@
 .notes-list {
   border: 1px solid green;
-  width: 40%;
+  width: 30%;
   margin: auto;
-  padding: 8px;
-  padding-top: 0;
+  padding: 16px;
+  padding-top: 8px;
   background-color: lightgreen;
+  height: 65vh;
+  overflow: auto;
 }

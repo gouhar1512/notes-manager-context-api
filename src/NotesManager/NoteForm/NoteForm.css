@@ -1,5 +1,5 @@
 .note-form {
-  width: 40%;
+  width: 30%;
   padding: 16px;
   margin: auto;
   margin-top: 8px;
@@ -37,4 +37,9 @@ button {
 
 #note-content {
   resize: none;
+}
+
+.update-ctas {
+  display: flex;
+  gap: 8px;
 }
