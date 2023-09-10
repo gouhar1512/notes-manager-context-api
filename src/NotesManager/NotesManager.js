@@ -5,8 +5,8 @@ import NotesList from "./NotesList/NotesList";
 const NotesManager = ({ notes, onAddNote, onDeleteNote }) => {
   return (
     <div className="notes-manager">
-      <NoteForm onAddNote={onAddNote} onDeleteNote={onDeleteNote} />
-      <NotesList notes={notes} />
+      <NoteForm onAddNote={onAddNote} />
+      <NotesList notes={notes} onDeleteNote={onDeleteNote} />
     </div>
   );
 };

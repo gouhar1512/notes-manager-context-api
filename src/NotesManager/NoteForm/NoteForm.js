@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./NoteForm.css";
 
-const NoteForm = ({ onAddNote, onDeleteNote }) => {
+const NoteForm = ({ onAddNote }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
