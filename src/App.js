@@ -9,8 +9,8 @@ import {
 import { notesReducer } from "./contexts/notesReducer";
 
 function App() {
-  const [notesList, dispatch] = useReducer(notesReducer, intialState);
-
+  const [appState, dispatch] = useReducer(notesReducer, intialState);
+  const notesList = appState.notesList;
   const [noteToUpdate, setNoteToUpdate] = useState(null);
 
   const setNoteToUpdateHandler = (note) => {
