@@ -5,12 +5,7 @@ import {
   NotesDispatchContext,
 } from "../../contexts/NotesContext";
 
-const NoteForm = ({
-  _notes,
-  noteToUpdate,
-  onUpdateNote,
-  setNoteToUpdateHandler,
-}) => {
+const NoteForm = ({ noteToUpdate, onUpdateNote, setNoteToUpdateHandler }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const id = crypto.randomUUID();

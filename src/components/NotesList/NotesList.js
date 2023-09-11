@@ -3,7 +3,7 @@ import Note from "../Note/Note";
 import "./NotesList.css";
 import { NotesContext } from "../../contexts/NotesContext";
 
-const NotesList = ({ onDeleteNote, setNoteToUpdateHandler }) => {
+const NotesList = ({ setNoteToUpdateHandler }) => {
   const notes = useContext(NotesContext);
   if (notes.length === 0) {
     return <div className="notes-list">Add some notes</div>;
@@ -12,7 +12,6 @@ const NotesList = ({ onDeleteNote, setNoteToUpdateHandler }) => {
     <Note
       key={note.id}
       note={note}
-      onDeleteNote={onDeleteNote}
       setNoteToUpdateHandler={setNoteToUpdateHandler}
     />
   ));
