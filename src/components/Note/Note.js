@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Note.css";
+import { NotesDispatchContext } from "../../contexts/NotesContext";
 
-const Note = ({ note, onDeleteNote, setNoteToUpdateHandler }) => {
+const Note = ({ note, setNoteToUpdateHandler }) => {
+  const dispatch = useContext(NotesDispatchContext);
+
   const deleteNoteHandler = () => {
-    onDeleteNote(note.id);
+    dispatch({
+      type: "DELETE",
+      id: note.id,
+    });
   };
+
   return (
     <div className="note">
       <div className="note-title">{note.title}</div>

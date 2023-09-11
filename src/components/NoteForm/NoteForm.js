@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./NoteForm.css";
+import { NotesContext } from "../../contexts/NotesContext";
 
 const NoteForm = ({
-  notes,
+  _notes,
   onAddNote,
   noteToUpdate,
   onUpdateNote,
@@ -12,6 +13,8 @@ const NoteForm = ({
   const [content, setContent] = useState("");
   const id = crypto.randomUUID();
   const [isUpdatingNote, setIsUpdatingNote] = useState(false);
+
+  const notes = useContext(NotesContext);
 
   useEffect(() => {
     if (noteToUpdate && notes.length > 0) {
@@ -55,7 +58,6 @@ const NoteForm = ({
       note.id = noteToUpdate.id;
       onUpdateNote(note);
     } else {
-      console.log(note);
       onAddNote(note);
     }
     setTitle("");

@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import Note from "../Note/Note";
 import "./NotesList.css";
+import { NotesContext } from "../../contexts/NotesContext";
 
-const NotesList = ({ notes, onDeleteNote, setNoteToUpdateHandler }) => {
+const NotesList = ({ onDeleteNote, setNoteToUpdateHandler }) => {
+  const notes = useContext(NotesContext);
   if (notes.length === 0) {
     return <div className="notes-list">Add some notes</div>;
   }
