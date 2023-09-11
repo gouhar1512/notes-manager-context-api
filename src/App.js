@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import NotesManager from "./NotesManager/NotesManager";
+import NotesManager from "./components/NotesManager/NotesManager";
 
 function App() {
   const [notesList, setNotesList] = useState([

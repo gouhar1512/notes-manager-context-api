@@ -1,6 +1,6 @@
 import React from "react";
-import NoteForm from "./NoteForm/NoteForm";
-import NotesList from "./NotesList/NotesList";
+import NoteForm from "../NoteForm/NoteForm";
+import NotesList from "../NotesList/NotesList";
 const NotesManager = ({
   notes,
   noteToUpdate,
