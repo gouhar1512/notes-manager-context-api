@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./NoteForm.css";
-import { NotesContext } from "../../contexts/NotesContext";
+import {
+  NotesContext,
+  NotesDispatchContext,
+} from "../../contexts/NotesContext";
 
 const NoteForm = ({
   _notes,
-  onAddNote,
   noteToUpdate,
   onUpdateNote,
   setNoteToUpdateHandler,
@@ -13,6 +15,7 @@ const NoteForm = ({
   const [content, setContent] = useState("");
   const id = crypto.randomUUID();
   const [isUpdatingNote, setIsUpdatingNote] = useState(false);
+  const dispatch = useContext(NotesDispatchContext);
 
   const notes = useContext(NotesContext);
 
@@ -58,7 +61,12 @@ const NoteForm = ({
       note.id = noteToUpdate.id;
       onUpdateNote(note);
     } else {
-      onAddNote(note);
+      dispatch({
+        type: "ADD",
+        id,
+        title,
+        content,
+      });
     }
     setTitle("");
     setContent("");
