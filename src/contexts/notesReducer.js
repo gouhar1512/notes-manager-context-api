@@ -23,8 +23,26 @@ export const notesReducer = (state, action) => {
         notesList: updatedNotesList,
       };
     }
-    case "UPDATE":
-      break;
+    case "SET_NOTE_ID_TO_UPDATE": {
+      return {
+        ...state,
+        noteIdToUpdate: action.id,
+      };
+    }
+    case "UPDATE": {
+      let updatedNotesList = [...state.notesList];
+      let index = updatedNotesList.findIndex(
+        (note) => note.id === state.noteIdToUpdate
+      );
+      let updatedNote = updatedNotesList[index];
+      updatedNote.title = action.title;
+      updatedNote.content = action.content;
+      updatedNotesList[index] = updatedNote;
+      return {
+        ...state,
+        notesList: updatedNotesList,
+      };
+    }
     default:
       return state;
   }

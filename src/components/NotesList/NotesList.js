@@ -3,17 +3,13 @@ import Note from "../Note/Note";
 import "./NotesList.css";
 import { NotesContext } from "../../contexts/NotesContext";
 
-const NotesList = ({ setNoteToUpdateHandler }) => {
-  const notes = useContext(NotesContext);
-  if (notes.length === 0) {
+const NotesList = () => {
+  const { notesList } = useContext(NotesContext);
+  if (notesList.length === 0) {
     return <div className="notes-list">Add some notes</div>;
   }
-  let mappedNotesList = notes.map((note) => (
-    <Note
-      key={note.id}
-      note={note}
-      setNoteToUpdateHandler={setNoteToUpdateHandler}
-    />
+  let mappedNotesList = notesList.map((note) => (
+    <Note key={note.id} note={note} />
   ));
   return <div className="notes-list">{mappedNotesList}</div>;
 };

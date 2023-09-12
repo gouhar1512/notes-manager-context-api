@@ -10,32 +10,12 @@ import { notesReducer } from "./contexts/notesReducer";
 
 function App() {
   const [appState, dispatch] = useReducer(notesReducer, intialState);
-  const notesList = appState.notesList;
-  const [noteToUpdate, setNoteToUpdate] = useState(null);
-
-  const setNoteToUpdateHandler = (note) => {
-    setNoteToUpdate(note);
-  };
-
-  const updateNoteHandler = (updateNote) => {
-    let updatedNotesList = [...notesList];
-    let index = updatedNotesList.findIndex(
-      (note) => note.id === noteToUpdate.id
-    );
-    updatedNotesList[index] = updateNote;
-    // setNotesList(updatedNotesList);
-    setNoteToUpdate(null);
-  };
 
   return (
-    <NotesContext.Provider value={notesList}>
+    <NotesContext.Provider value={appState}>
       <NotesDispatchContext.Provider value={dispatch}>
         <div className="App">
-          <NotesManager
-            noteToUpdate={noteToUpdate}
-            onUpdateNote={updateNoteHandler}
-            setNoteToUpdateHandler={setNoteToUpdateHandler}
-          />
+          <NotesManager />
         </div>
       </NotesDispatchContext.Provider>
     </NotesContext.Provider>

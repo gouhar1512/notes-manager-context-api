@@ -5,33 +5,33 @@ import {
   NotesDispatchContext,
 } from "../../contexts/NotesContext";
 
-const NoteForm = ({ noteToUpdate, onUpdateNote, setNoteToUpdateHandler }) => {
+const NoteForm = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const id = crypto.randomUUID();
   const [isUpdatingNote, setIsUpdatingNote] = useState(false);
   const dispatch = useContext(NotesDispatchContext);
 
-  const notes = useContext(NotesContext);
+  const { notesList, noteIdToUpdate } = useContext(NotesContext);
 
   useEffect(() => {
-    if (noteToUpdate && notes.length > 0) {
+    if (noteIdToUpdate && notesList.length > 0) {
       setIsUpdatingNote(true);
     } else {
       setIsUpdatingNote(false);
-      setNoteToUpdateHandler(null);
     }
-  }, [noteToUpdate, notes.length, setNoteToUpdateHandler]);
+  }, [noteIdToUpdate, notesList.length]);
 
   useEffect(() => {
-    if (noteToUpdate) {
-      setTitle(noteToUpdate.title);
-      setContent(noteToUpdate.content);
+    const note = notesList.find((item) => item.id === noteIdToUpdate);
+    if (note) {
+      setTitle(note.title);
+      setContent(note.content);
     } else {
       setTitle("");
       setContent("");
     }
-  }, [isUpdatingNote, noteToUpdate]);
+  }, [noteIdToUpdate, notesList]);
 
   const setTitleHandler = (e) => {
     setTitle(e.target.value);
@@ -41,20 +41,29 @@ const NoteForm = ({ noteToUpdate, onUpdateNote, setNoteToUpdateHandler }) => {
     setContent(e.target.value);
   };
 
+  const cancelUpdateHandler = () => {
+    dispatch({
+      type: "SET_NOTE_ID_TO_UPDATE",
+      id: null,
+    });
+  };
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
     if (!title.trim() || !content.trim()) {
       return;
     }
-    let note = {
-      id,
-      title,
-      content,
-    };
-    if (noteToUpdate && notes.length > 0) {
-      note.id = noteToUpdate.id;
-      onUpdateNote(note);
+
+    if (noteIdToUpdate && notesList.length > 0) {
+      dispatch({
+        type: "UPDATE",
+        title,
+        content,
+      });
+      dispatch({
+        type: "SET_NOTE_ID_TO_UPDATE",
+        id: null,
+      });
     } else {
       dispatch({
         type: "ADD",
@@ -91,8 +100,9 @@ const NoteForm = ({ noteToUpdate, onUpdateNote, setNoteToUpdateHandler }) => {
             Update Note
           </button>
           <button
+            type="button"
             className="btn-cancel-update"
-            onClick={() => setNoteToUpdateHandler(null)}>
+            onClick={cancelUpdateHandler}>
             Cancel
           </button>
         </div>

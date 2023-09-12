@@ -6,7 +6,7 @@ export const intialState = {
     { id: 2, title: "Note 2", content: "This is note two" },
     { id: 3, title: "Note 3", content: "This is note three" },
   ],
-  noteToUpdate: null,
+  noteIdToUpdate: null,
 };
 
 export const NotesContext = createContext();
