@@ -1,4 +1,4 @@
-import { useReducer, useState } from "react";
+import { useReducer } from "react";
 import "./App.css";
 import NotesManager from "./components/NotesManager/NotesManager";
 import {
