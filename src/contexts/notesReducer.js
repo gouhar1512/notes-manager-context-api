@@ -1,6 +1,7 @@
+import { ADD, DELETE, SET_NOTE_ID_TO_UPDATE, UPDATE } from "./notesConstant";
 export const notesReducer = (state, action) => {
   switch (action.type) {
-    case "ADD": {
+    case ADD: {
       let updatedNotesList = [...state.notesList];
       let newNote = {
         id: action.id,
@@ -13,7 +14,7 @@ export const notesReducer = (state, action) => {
         notesList: updatedNotesList,
       };
     }
-    case "DELETE": {
+    case DELETE: {
       let updatedNotesList = [...state.notesList];
       updatedNotesList = updatedNotesList.filter(
         (note) => note.id !== action.id
@@ -23,13 +24,13 @@ export const notesReducer = (state, action) => {
         notesList: updatedNotesList,
       };
     }
-    case "SET_NOTE_ID_TO_UPDATE": {
+    case SET_NOTE_ID_TO_UPDATE: {
       return {
         ...state,
         noteIdToUpdate: action.id,
       };
     }
-    case "UPDATE": {
+    case UPDATE: {
       let updatedNotesList = [...state.notesList];
       let index = updatedNotesList.findIndex(
         (note) => note.id === state.noteIdToUpdate
