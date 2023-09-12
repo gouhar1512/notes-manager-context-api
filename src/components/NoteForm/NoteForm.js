@@ -4,6 +4,11 @@ import {
   NotesContext,
   NotesDispatchContext,
 } from "../../contexts/NotesContext";
+import {
+  ADD_ACTION,
+  SET_NOTEID_TO_UPDATE_ACTION,
+  UPDATE_ACTION,
+} from "../../contexts/notesActionCreators";
 
 const NoteForm = () => {
   const [title, setTitle] = useState("");
@@ -41,12 +46,8 @@ const NoteForm = () => {
     setContent(e.target.value);
   };
 
-  const cancelUpdateHandler = () => {
-    dispatch({
-      type: "SET_NOTE_ID_TO_UPDATE",
-      id: null,
-    });
-  };
+  const cancelUpdateHandler = () => dispatch(SET_NOTEID_TO_UPDATE_ACTION(null));
+
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
@@ -55,22 +56,10 @@ const NoteForm = () => {
     }
 
     if (noteIdToUpdate && notesList.length > 0) {
-      dispatch({
-        type: "UPDATE",
-        title,
-        content,
-      });
-      dispatch({
-        type: "SET_NOTE_ID_TO_UPDATE",
-        id: null,
-      });
+      dispatch(UPDATE_ACTION(title, content));
+      dispatch(SET_NOTEID_TO_UPDATE_ACTION(null));
     } else {
-      dispatch({
-        type: "ADD",
-        id,
-        title,
-        content,
-      });
+      dispatch(ADD_ACTION(id, title, content));
     }
     setTitle("");
     setContent("");

@@ -1,22 +1,20 @@
 import React, { useContext } from "react";
 import "./Note.css";
 import { NotesDispatchContext } from "../../contexts/NotesContext";
+import {
+  DELETE_ACTION,
+  SET_NOTEID_TO_UPDATE_ACTION,
+} from "../../contexts/notesActionCreators";
 
 const Note = ({ note }) => {
   const dispatch = useContext(NotesDispatchContext);
 
   const deleteNoteHandler = () => {
-    dispatch({
-      type: "DELETE",
-      id: note.id,
-    });
+    dispatch(DELETE_ACTION(note.id));
   };
 
   const setNoteToUpdateHandler = () => {
-    dispatch({
-      type: "SET_NOTE_ID_TO_UPDATE",
-      id: note.id,
-    });
+    dispatch(SET_NOTEID_TO_UPDATE_ACTION(note.id));
   };
 
   return (
